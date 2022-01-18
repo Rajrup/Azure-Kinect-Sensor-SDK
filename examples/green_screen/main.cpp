@@ -172,6 +172,8 @@ int main(int argc, char **argv)
     cv::Mat background_image = color_to_opencv(background_captures[0].get_color_image());
     cv::Mat output_image = background_image.clone(); // allocated outside the loop to avoid re-creating every time
 
+    cout << "Hello" << endl;
+
     if (num_devices == 1)
     {
         std::chrono::time_point<std::chrono::system_clock> start_time = std::chrono::system_clock::now();

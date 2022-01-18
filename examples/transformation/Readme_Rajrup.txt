@@ -1,0 +1,2 @@
+./transformation_example playback ~/kinect/2-device/08-06-2021/0/output-0.mkv 5000 ~/kinect/2-device/08-06-2021/0/5000.ply
+./transformation_example playback ~/kinect/2-device/08-06-2021/1/output-1.mkv 5000 ~/kinect/2-device/08-06-2021/1/5000.ply
