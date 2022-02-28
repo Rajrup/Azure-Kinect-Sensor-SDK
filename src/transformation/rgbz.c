@@ -5,6 +5,7 @@
 #include <k4ainternal/logging.h>
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <limits.h>
 #include <math.h>
 
@@ -1090,6 +1091,7 @@ static void transformation_depth_to_xyz(k4a_transformation_xy_tables_t *xy_table
                                         const void *depth_image_data,
                                         void *xyz_image_data)
 {
+    // LOG_CRITICAL("NO NEON or SSE", 1);
     const uint16_t *depth_image_data_uint16 = (const uint16_t *)depth_image_data;
     int16_t *xyz_data_int16 = (int16_t *)xyz_image_data;
     int16_t x, y, z;
@@ -1133,6 +1135,7 @@ static void transformation_depth_to_xyz(k4a_transformation_xy_tables_t *xy_table
                                         const void *depth_image_data,
                                         void *xyz_image_data)
 {
+    // LOG_CRITICAL("NEON", 1);
     float *x_tab = (float *)xy_tables->x_table;
     float *y_tab = (float *)xy_tables->y_table;
     const uint16_t *depth_image_data_uint16 = (const uint16_t *)depth_image_data;
@@ -1186,6 +1189,13 @@ static void transformation_depth_to_xyz(k4a_transformation_xy_tables_t *xy_table
                                         const void *depth_image_data,
                                         void *xyz_image_data)
 {
+    /**
+     * RAJRUP: Only Critical logging level works.
+     * TODO: Don't know how to make LOG_INFO work.
+     */
+
+    // LOG_CRITICAL("SSE", 1);
+    // printf("transformation_depth_to_xyz: Entering\n");
     const __m128i *depth_image_data_m128i = (const __m128i *)depth_image_data;
 #if defined(__clang__) || defined(__GNUC__)
     void *x_table = __builtin_assume_aligned(xy_tables->x_table, 16);
